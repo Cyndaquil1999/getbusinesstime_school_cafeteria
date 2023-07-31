@@ -135,7 +135,10 @@ print(business_hours)
 
 df = pd.DataFrame({
     '店舗': filtered_cafe['店舗'],
-    '営業状況': business_hours
+    '営業状況': business_hours,
+    '短縮営業期間': filtered_cafe['短縮営業期間'],
+    '営業期間': filtered_cafe['営業時間'],
+    '左記期間内の休業': filtered_cafe['左記期間内の休業']
 })
 
 # Streamlitに結果を表示
