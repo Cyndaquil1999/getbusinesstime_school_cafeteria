@@ -129,7 +129,7 @@ for i in range(len(filtered_cafe)):
     
 
 # 今日の日付と時刻を取得
-current_date_time = datetime.now().strftime('%Y年%m月%d日 %H:%M:%S')
+current_date_time = datetime.now(timezone(timedelta(hours=9))).strftime('%Y年%m月%d日 %H:%M:%S')
 
 print(business_hours)
 
