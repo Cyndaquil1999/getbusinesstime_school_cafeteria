@@ -2,7 +2,7 @@ from requests import get
 from bs4 import BeautifulSoup
 import re
 import streamlit as st
-from datetime import datetime
+import datetime
 
 # エスケープ文字と特定のパターンを含む配列を出力しないようにする関数
 def should_output(row):
@@ -39,7 +39,7 @@ if tbody_element:
 # 営業時間等の取得
 flg = False
 business_hours = []
-now = datetime.now()
+now = datetime.datetime.now(datetime.timezone(datetime.timedelta(hours=9)))
 current_time = now.strftime('%H:%M')
 is_holiday = now.weekday() >= 5  # 土曜日(5)または日曜日(6)なら休日
 
