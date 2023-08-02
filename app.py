@@ -73,7 +73,7 @@ today = datetime.now(timezone(timedelta(hours=9))).replace(hour=0, minute=0, sec
 current_time = datetime.now() + timedelta(hours=9)
 #current_time = datetime.strptime('2023/08/02 12:00', '%Y/%m/%d %H:%M')
 print(f'current_time: {current_time}')
-st.write(f'current_time: {current_time}')
+#st.write(f'current_time: {current_time}')
 
 for i in range(len(filtered_cafe)):
     mode = 0
@@ -107,7 +107,7 @@ for i in range(len(filtered_cafe)):
             start = businesstime[0]
             end = businesstime[1]
             print(f'start: {start}\tend: {end}')
-            st.write(f'start: {start}\tend: {end}')
+            #st.write(f'start: {start}\tend: {end}')
             
             # 営業時間中であるかを判定
             if start <= current_time and current_time <= end:
