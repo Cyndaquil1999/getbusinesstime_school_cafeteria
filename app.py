@@ -70,7 +70,9 @@ filtered_cafe =  cafe[cafe['id'] == get_id_from_campus_name(campus, user_input)]
 # 営業時間等の取得
 business_hours = []
 today = datetime.now(timezone(timedelta(hours=9))).replace(hour=0, minute=0, second=0, microsecond=0)
-current_time = datetime.now(timezone(timedelta(hours=9)))
+current_time = datetime.now()
+#current_time = datetime.strptime('2023/08/01 12:00', '%Y/%m/%d %H:%M').astimezone(timezone(timedelta(hours=9)))
+
 
 for i in range(len(filtered_cafe)):
     mode = 0
@@ -101,11 +103,11 @@ for i in range(len(filtered_cafe)):
             businesstime = list(map(lambda x: datetime.strptime(today.strftime('%Y/%m/%d')+ ' ' + x, '%Y/%m/%d %H:%M'), times))
             #print(businesstime)
             
-            start = businesstime[0].astimezone(timezone(timedelta(hours=9)))
-            end = businesstime[1].astimezone(timezone(timedelta(hours=9)))
+            start = businesstime[0]
+            end = businesstime[1]
 
             # 営業時間中であるかを判定
-            if start <= current_time <= end:
+            if start <= current_time and current_time <= end:
                 #print("営業しています！")
                 mode = 2
             else:
@@ -140,6 +142,7 @@ df = pd.DataFrame({
     '営業期間': filtered_cafe['営業時間'],
     '左記期間内の休業': filtered_cafe['左記期間内の休業']
 })
+
 
 # Streamlitに結果を表示
 st.write(f"現在日時: {current_date_time}")
