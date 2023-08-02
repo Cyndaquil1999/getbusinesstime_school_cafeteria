@@ -70,7 +70,7 @@ filtered_cafe =  cafe[cafe['id'] == get_id_from_campus_name(campus, user_input)]
 # 営業時間等の取得
 business_hours = []
 today = datetime.now(timezone(timedelta(hours=9))).replace(hour=0, minute=0, second=0, microsecond=0)
-current_time = datetime.now(timezone(timedelta(hours=9)))
+current_time = datetime.now(timezone(timedelta(hours=0)))
 #current_time = datetime.strptime('2023/08/02 12:00', '%Y/%m/%d %H:%M').astimezone(timezone(timedelta(hours=9)))
 print(f'current_time: {current_time}')
 st.write(f'current_time: {current_time}')
