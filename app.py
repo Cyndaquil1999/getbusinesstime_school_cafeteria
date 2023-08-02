@@ -84,8 +84,8 @@ for i in range(len(filtered_cafe)):
     #print(time_range)
     
     left, right = datetime.strptime(time_range[0], '%Y/%m/%d'), datetime.strptime(time_range[1], '%Y/%m/%d')
-    left = left
-    right = right
+    left = left.astimezone(timezone(timedelta(hours=9)))
+    right = right.astimezone(timezone(timedelta(hours=9)))
     
     # 短縮営業期間内であるかを判定
     if left <= today and today <= right:
@@ -101,7 +101,7 @@ for i in range(len(filtered_cafe)):
             text = row['営業時間']
             time_pattern = r"\d{1,2}:\d{2}"
             times = re.findall(time_pattern, text)
-            businesstime = list(map(lambda x: datetime.strptime(today.strftime('%Y/%m/%d')+ ' ' + x, '%Y/%m/%d %H:%M').astimezone(timezone(timedelta(hours=9))), times))
+            businesstime = list(map(lambda x: datetime.strptime(today.strftime('%Y/%m/%d')+ ' ' + x, '%Y/%m/%d %H:%M'), times))
             #print(businesstime)
             
             start = businesstime[0]
