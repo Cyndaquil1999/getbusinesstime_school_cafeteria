@@ -73,6 +73,7 @@ today = datetime.now(timezone(timedelta(hours=9))).replace(hour=0, minute=0, sec
 current_time = datetime.now(timezone(timedelta(hours=9)))
 #current_time = datetime.strptime('2023/08/02 12:00', '%Y/%m/%d %H:%M').astimezone(timezone(timedelta(hours=9)))
 print(f'current_time: {current_time}')
+st.write(f'current_time: {current_time}')
 
 for i in range(len(filtered_cafe)):
     mode = 0
@@ -106,7 +107,8 @@ for i in range(len(filtered_cafe)):
             start = businesstime[0].astimezone(timezone(timedelta(hours=9)))
             end = businesstime[1].astimezone(timezone(timedelta(hours=9)))
             print(f'start: {start}\tend: {end}')
-
+            st.write(f'start: {start}\tend: {end}')
+            
             # 営業時間中であるかを判定
             if start <= current_time and current_time <= end:
                 #print("営業しています！")
@@ -140,7 +142,7 @@ df = pd.DataFrame({
     '店舗': filtered_cafe['店舗'],
     '営業状況': business_hours,
     '短縮営業期間': filtered_cafe['短縮営業期間'],
-    '営業時間': filtered_cafe['営業時間'],
+    '営業期間': filtered_cafe['営業時間'],
     '左記期間内の休業': filtered_cafe['左記期間内の休業']
 })
 
