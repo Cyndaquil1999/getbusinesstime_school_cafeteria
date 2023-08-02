@@ -70,8 +70,8 @@ filtered_cafe =  cafe[cafe['id'] == get_id_from_campus_name(campus, user_input)]
 # 営業時間等の取得
 business_hours = []
 today = datetime.now(timezone(timedelta(hours=9))).replace(hour=0, minute=0, second=0, microsecond=0)
-current_time = datetime.now(timezone(timedelta(hours=0)))
-#current_time = datetime.strptime('2023/08/02 12:00', '%Y/%m/%d %H:%M').astimezone(timezone(timedelta(hours=9)))
+current_time = datetime.now(timezone(timedelta(hours=9)))
+current_time = datetime.strptime('2023/08/02 12:00', '%Y/%m/%d %H:%M').astimezone(timezone(timedelta(hours=9)))
 print(f'current_time: {current_time}')
 st.write(f'current_time: {current_time}')
 
@@ -101,11 +101,11 @@ for i in range(len(filtered_cafe)):
             text = row['営業時間']
             time_pattern = r"\d{1,2}:\d{2}"
             times = re.findall(time_pattern, text)
-            businesstime = list(map(lambda x: datetime.strptime(today.strftime('%Y/%m/%d')+ ' ' + x, '%Y/%m/%d %H:%M'), times))
+            businesstime = list(map(lambda x: datetime.strptime(today.strftime('%Y/%m/%d')+ ' ' + x, '%Y/%m/%d %H:%M').astimezone(timezone(timedelta(hours=9))), times))
             #print(businesstime)
             
-            start = businesstime[0].astimezone(timezone(timedelta(hours=0)))
-            end = businesstime[1].astimezone(timezone(timedelta(hours=0)))
+            start = businesstime[0]
+            end = businesstime[1]
             print(f'start: {start}\tend: {end}')
             st.write(f'start: {start}\tend: {end}')
             
