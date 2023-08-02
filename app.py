@@ -84,8 +84,8 @@ for i in range(len(filtered_cafe)):
     #print(time_range)
     
     left, right = datetime.strptime(time_range[0], '%Y/%m/%d'), datetime.strptime(time_range[1], '%Y/%m/%d')
-    left = left
-    right = right
+    left = left.astimezone(timezone(timedelta(hours=9)))
+    right = right.astimezone(timezone(timedelta(hours=9)))
     
     # 短縮営業期間内であるかを判定
     if left <= today and today <= right:
