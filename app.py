@@ -104,8 +104,8 @@ for i in range(len(filtered_cafe)):
             businesstime = list(map(lambda x: datetime.strptime(today.strftime('%Y/%m/%d')+ ' ' + x, '%Y/%m/%d %H:%M'), times))
             #print(businesstime)
             
-            start = businesstime[0].astimezone(timezone(timedelta(hours=9)))
-            end = businesstime[1].astimezone(timezone(timedelta(hours=9)))
+            start = businesstime[0].astimezone(timezone(timedelta(hours=0)))
+            end = businesstime[1].astimezone(timezone(timedelta(hours=0)))
             print(f'start: {start}\tend: {end}')
             st.write(f'start: {start}\tend: {end}')
             
