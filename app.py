@@ -70,8 +70,8 @@ filtered_cafe =  cafe[cafe['id'] == get_id_from_campus_name(campus, user_input)]
 # 営業時間等の取得
 business_hours = []
 today = datetime.now(timezone(timedelta(hours=9))).replace(hour=0, minute=0, second=0, microsecond=0)
-#current_time = datetime.now(timezone(timedelta(hours=9)))
-current_time = datetime.strptime('2023/08/02 12:00', '%Y/%m/%d %H:%M')
+current_time = datetime.now(timezone(timedelta(hours=9)))
+#current_time = datetime.strptime('2023/08/02 12:00', '%Y/%m/%d %H:%M')
 print(f'current_time: {current_time}')
 st.write(f'current_time: {current_time}')
 
@@ -84,8 +84,8 @@ for i in range(len(filtered_cafe)):
     #print(time_range)
     
     left, right = datetime.strptime(time_range[0], '%Y/%m/%d'), datetime.strptime(time_range[1], '%Y/%m/%d')
-    left = left.astimezone(timezone(timedelta(hours=9)))
-    right = right.astimezone(timezone(timedelta(hours=9)))
+    left = left
+    right = right
     
     # 短縮営業期間内であるかを判定
     if left <= today and today <= right:
