@@ -1,5 +1,3 @@
-from requests import get
-from bs4 import BeautifulSoup
 import re
 import streamlit as st
 from datetime import datetime, timedelta, timezone
@@ -27,7 +25,7 @@ def extract_dates(string):
         
     return dates
 
-# 短縮営業期間内の土日祝日を抽出してセットとして返す関数
+# 短縮営業期間内の土日祝日以外の休日を抽出してセットとして返す関数
 def extract_holidays(holiday_info, current_year):
     holidays = set()
     date_range = holiday_info.split("・")[1].split("～")
@@ -70,6 +68,7 @@ filtered_cafe =  cafe[cafe['id'] == get_id_from_campus_name(campus, user_input)]
 # 営業時間等の取得
 business_hours = []
 today = datetime.now(timezone(timedelta(hours=9))).replace(hour=0, minute=0, second=0, microsecond=0)
+print(f'today: {today}')
 current_time = datetime.now() + timedelta(hours=9)
 #current_time = datetime.strptime('2023/08/02 12:00', '%Y/%m/%d %H:%M')
 print(f'current_time: {current_time}')
@@ -87,10 +86,13 @@ for i in range(len(filtered_cafe)):
     left = left.astimezone(timezone(timedelta(hours=9)))
     right = right.astimezone(timezone(timedelta(hours=9)))
     
+    
     # 短縮営業期間内であるかを判定
     if left <= today and today <= right:
         #print('短縮営業期間です！')
-        holidays = extract_holidays(row['左記期間内の休業'], datetime.now().year) | get_weekend_holidays(left, right)  
+        #print(get_weekend_holidays(left, right))
+        #print(extract_holidays(row['左記期間内の休業'], datetime.now().year))
+        holidays = extract_holidays(row['左記期間内の休業'], datetime.now(timezone(timedelta(hours=9))).year) | get_weekend_holidays(left, right)  
         #print(holidays)
         
         # 休業日であるかを判定
