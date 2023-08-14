@@ -101,9 +101,9 @@ for i in range(len(filtered_cafe)):
         #print(holidays)
         
         # for debug
-        st.write(today)
-        for holiday in holidays:
-           st.write(holiday)
+        #st.write(today)
+        #for holiday in holidays:
+        #   st.write(holiday)
         # 休業日であるかを判定
         if today in holidays:
             #print('今日はお休みです')
