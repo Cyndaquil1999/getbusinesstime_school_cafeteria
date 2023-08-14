@@ -97,7 +97,8 @@ for i in range(len(filtered_cafe)):
         #print('短縮営業期間です！')
         #print(get_weekend_holidays(left, right))
         #print(extract_holidays(row['左記期間内の休業'], datetime.now().year))
-        holidays = extract_holidays(row['左記期間内の休業'], datetime.now(timezone(timedelta(hours=9))).year) | get_weekend_holidays(left, right)  
+        #extract_holidays(row['左記期間内の休業'], datetime.now(timezone(timedelta(hours=9))).year) | 
+        holidays = get_weekend_holidays(left, right)  
         #print(holidays)
         
         # for debug
