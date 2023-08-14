@@ -30,8 +30,13 @@ def extract_holidays(holiday_info, current_year):
     holidays = set()
     date_range = holiday_info.split("・")[1].split("～")
     start_date_str, end_date_str = date_range[0].strip(), date_range[1].strip()  # 空白を削除
-    start_date = datetime.strptime(f"{current_year}/{start_date_str}", "%Y/%m/%d").astimezone(timezone(timedelta(hours=9)))
-    end_date = datetime.strptime(f"{current_year}/{end_date_str}", "%Y/%m/%d").astimezone(timezone(timedelta(hours=9)))
+    start_date = datetime.strptime(f"{current_year}/{start_date_str}", "%Y/%m/%d")
+    start_date = start_date.astimezone(timezone(timedelta(hours=9)))
+    start_date = start_date.replace(hour=0, minute=0, second=0, microsecond=0)
+    
+    end_date = datetime.strptime(f"{current_year}/{end_date_str}", "%Y/%m/%d")
+    end_date = end_date.astimezone(timezone(timedelta(hours=9)))
+    end_date = end_date.replace(hour=0, minute=0, second=0, microsecond=0)
 
     current_date = start_date
     while current_date <= end_date:
@@ -98,7 +103,7 @@ for i in range(len(filtered_cafe)):
         # for debug
         st.write(today)
         for holiday in holidays:
-            st.write(holiday)
+           st.write(holiday)
         # 休業日であるかを判定
         if today in holidays:
             #print('今日はお休みです')
