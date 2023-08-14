@@ -88,8 +88,8 @@ for i in range(len(filtered_cafe)):
     #print(time_range)
     
     left, right = datetime.strptime(time_range[0], '%Y/%m/%d'), datetime.strptime(time_range[1], '%Y/%m/%d')
-    left = left.astimezone(timezone(timedelta(hours=9)))
-    right = right.astimezone(timezone(timedelta(hours=9)))
+    left = left.astimezone(timezone(timedelta(hours=9))).replace(hour=0, minute=0, second=0, microsecond=0)
+    right = right.astimezone(timezone(timedelta(hours=9))).replace(hour=0, minute=0, second=0, microsecond=0)
     
     
     # 短縮営業期間内であるかを判定
@@ -97,8 +97,7 @@ for i in range(len(filtered_cafe)):
         #print('短縮営業期間です！')
         #print(get_weekend_holidays(left, right))
         #print(extract_holidays(row['左記期間内の休業'], datetime.now().year))
-        #extract_holidays(row['左記期間内の休業'], datetime.now(timezone(timedelta(hours=9))).year) | 
-        holidays = get_weekend_holidays(left, right)  
+        holidays = extract_holidays(row['左記期間内の休業'], datetime.now(timezone(timedelta(hours=9))).year) | get_weekend_holidays(left, right)  
         #print(holidays)
         
         # for debug
