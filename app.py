@@ -28,6 +28,8 @@ def extract_dates(string):
 # 短縮営業期間内の土日祝日以外の休日を抽出してセットとして返す関数
 def extract_holidays(holiday_info, current_year):
     holidays = set()
+    if holiday_info == "休みなし":
+        return holidays
     date_range = holiday_info.split("・")[1].split("～")
     start_date_str, end_date_str = date_range[0].strip(), date_range[1].strip()  # 空白を削除
     start_date = datetime.strptime(f"{current_year}/{start_date_str}", "%Y/%m/%d")
